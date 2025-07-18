@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <!-- //fevicon -->
+    <link rel="icon" href="assets/scorecrafterlogo.png"> 
+    <title>ScoreCraftr</title>
+</head>
+<body>
+    <header>
+        <div class="head">
+            ScoreCraftr
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="container-head">
+            <h1>Extract Student Course Data</h1>
+            <p>Upload a PDF with student academic records and specify courses with their score types to extract relevant data.</p>
+        </div>
+        <div class="upload">
+            <h5>📂 Upload Student Records PDF</h5>
+            <p>Select a PDF file containing student grades.</p>
+            <p>Note: Only PDF documents issued by SPPU (Savitribai Phule Pune University) are supported.</p>
+
+            <label for="inputFile" class="input-label">
+                <i class="fa-solid fa-file-arrow-up"></i>Upload File
+            </label>
+            <input type="file" id="inputFile" style="display: none;">
+        </div>
+        <div class="course-info">
+            <div class="course-name">
+                <p>
+                    Enter a course name and select score types to search for in the PDF.
+                </p>
+                <input type="text" placeholder="Enter course name (e.g.,DISCRETE MATHEMATICS)">
+                <button>
+                    <i class="fa-solid fa-plus"></i>
+                    Add course
+                </button>
+            </div>
+            <div class="section-select">
+                <div class="pattern">
+                    <button class="pattern-2019" id="pattern-2019">2019 Pattern</button>
+                    <button id="pattern-2024">2024 Pattern</button>
+                </div>
+                <div class="checkboxes-2019">
+                <label for="ISE">
+                    <input id="ISE" type="checkbox" class="score-type" value="ISE">ISE
+                </label>
+                <label for="TOTAL">
+                    <input id="TOTAL" type="checkbox" class="score-type" value="TOTAL">TOTAL
+                </label>
+                <label for="PR">
+                    <input id="PR" type="checkbox" class="score-type" value="PR">PR
+                </label>
+                <label for="TUT">
+                    <input id="TUT" type="checkbox" class="score-type" value="TUT">TUT
+                </label>
+                <label for="CRD">
+                    <input id="CRD" type="checkbox" class="score-type" value="CRD">CRD
+                </label>
+                <label for="GP">
+                    <input id="GP" type="checkbox" class="score-type" value="GP">GP
+                </label>
+                <label for="P&R">
+                    <input id="P&R" type="checkbox" class="score-type" value="P&R">P&R
+                </label>
+                <label for="ESE">
+                    <input id="ESE" type="checkbox" class="score-type" value="ESE">ESE
+                </label>
+                <label for="TW">
+                    <input id="TW" type="checkbox" class="score-type" value="TW">TW
+                </label>
+                <label for="OR">
+                    <input id="OR" type="checkbox" class="score-type" value="OR">OR
+                </label>
+                <label for="TOT%">
+                    <input id="TOT%" type="checkbox" class="score-type" value="TOT%">TOT%
+                </label>
+                <label for="GRD">
+                    <input id="GRD" type="checkbox" class="score-type" value="GRD">GRD
+                </label>
+                <label for="CP">
+                    <input id="CP" type="checkbox" class="score-type" value="CP">CP
+                </label>
+                <label for="ORD">
+                    <input id="ORD" type="checkbox" class="score-type" value="ORD">ORD
+                </label>
+                </div>
+                <div class="checkboxes-2024">
+                    <label for="CCE">
+                        <input id="CCE" type="checkbox" class="score-type" value="CCE">CCE
+                    </label>
+                    <label for="ESE">
+                        <input id="ESE" type="checkbox" class="score-type" value="ESE">TOTAL
+                    </label>
+                    <label for="TW">
+                        <input id="TW" type="checkbox" class="score-type" value="TW">TW
+                    </label>
+                    <label for="INT">
+                        <input id="INT" type="checkbox" class="score-type" value="INT">INT
+                    </label>
+                    <label for="PJ">
+                        <input id="PJ" type="checkbox" class="score-type" value="PJ">PJ
+                    </label>
+                    <label for="TOT">
+                        <input id="TOT" type="checkbox" class="score-type" value="TOT">TOT
+                    </label>
+                    <label for="ERNCRD">
+                        <input id="ERNCRD" type="checkbox" class="score-type" value="ERNCRD">ERN CRD
+                    </label>
+                    <label for="GRD">
+                        <input id="GRD" type="checkbox" class="score-type" value="GRD">GRD
+                    </label>
+                    <label for="GRDPNT">
+                        <input id="GRDPNT" type="checkbox" class="score-type" value="GRDPNT">GRD PNT
+                    </label>
+                    <label for="CRDPNT">
+                        <input id="CRDPNT" type="checkbox" class="score-type" value="CRDPNT">CRD PNT
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="instruction">
+                <p>
+                    Review added courses and score types. Click <i class="fa-solid fa-trash"></i> to remove an entry or <i class="fa-solid fa-file-export"></i>  Extract Data to process the PDF.
+                </p>
+        </div>
+            <table class="course-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Course</th>
+                        <th>Score Type</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        <div class="extract">
+            <button>
+                <i class="fa-solid fa-file-export"></i>
+                Extract Data
+            </button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

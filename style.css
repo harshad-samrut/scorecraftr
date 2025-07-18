@@ -1,0 +1,296 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+/* In your style.css or inside <style> tag */
+:root{
+    --p-color : #706f7d;
+    --p-font : 13px;
+    --hover : #4338ca;
+}
+body {
+  font-family: 'Ubuntu', sans-serif;
+}
+header{
+    background-color: #030030;
+    color: whitesmoke;
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    /* border-image: linear-gradient(90deg, #6366f1, #10b981) 1; */
+    border-radius: 12px;
+    max-width: 700px;  /* or 800px, depending on your design */
+    margin: 1.5rem auto;    /* centers the box horizontally */
+    padding: 10px; 
+    gap: 2vh;
+}
+.container-head{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    text-align: center;
+    /* gap: 1.5em; */
+    font-size: var(--p-font);
+}
+.container-head p{
+    color: var(--p-color);
+    /* padding: 1.1em; */
+    margin: 1.5rem 4rem;
+}
+.upload{
+    display: flex;
+    flex-direction: column;
+    gap: 0.9em;
+    background-color: #f1f5f9;
+    width: 90%;
+    height: auto;
+    padding: 1.5rem;
+    border: 1px solid rgba(161, 161, 161, 0.797);
+    border-radius:12px;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.15);
+
+}
+.upload p{
+    color: var(--p-color);
+    font-size: var(--p-font);
+}
+.upload label{
+    /* all:unset; */
+    background-color: #3b82f6;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    text-align: center;
+    display: flex;
+    gap:0.8vw;
+    align-items: center;
+    justify-content: center;
+    transition: all 1s ease-out;
+}
+.upload label:hover{
+    cursor: pointer;
+    background-color: var(--hover);
+    color: white;
+}
+
+.upload label.uploaded {
+  background-color: #10b981;
+  color: whitesmoke;
+}
+
+.course-info{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 0.7rem 1.5rem;
+    font-size: 14px;
+    color: var(--p-color);
+    background-color: #f1f5f9;
+    width: 90%;
+    height: auto;
+    padding: 10px;
+    border: 1px solid rgba(161, 161, 161, 0.797);
+    border-radius:12px;
+    box-shadow: inset 0 0 10px rgba(0, 0,    0, 0.15);
+}
+.course-name{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+input[type="text"] {
+  width: 100%;                 /* takes full width of parent */
+  padding: 12px 16px;          /* top-bottom and left-right padding */
+  border: 1px solid rgba(161, 161, 161, 0.797);   /* blue-ish border */
+  border-radius: 8px;          /* rounded corners */
+  font-size: 14px;             /* readable text */
+  outline: none;               /* remove default focus ring */
+  box-sizing: border-box;      /* includes padding inside width */
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #000a96;       /* brighter border on focus */
+  box-shadow: 0px 0px 3px #000a96;
+}
+
+.course-name button{
+    background-color: #3b82f6;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    gap:0.8vw;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.course-name button:hover{
+    background-color: var(--hover);
+}
+.section-select{
+    display: flex;
+    flex-direction: column;
+    gap: 4vh;
+    justify-content: space-evenly;
+    margin-top: 2vh;
+}
+.pattern{
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    right: 1.5vw;
+}
+.pattern button{
+    all: unset;
+    color: black;
+    background-color:rgba(182, 182, 182, 0.329); 
+    padding: 1.05vw 1.05vh;
+    border-radius: 12px;
+    cursor: pointer;
+}
+.pattern button:hover{
+    background-color: var(--hover);
+    color: white;
+}
+
+.pattern .pattern-2019{
+    color: whitesmoke;
+    background-color:#3b82f6; 
+    padding: 1.05vw 1.05vh;
+    border-radius: 12px;
+}
+.pattern-2019:hover{
+    background-color:var(--hover); 
+}
+.pattern .pattern-2024{
+    color: whitesmoke;
+    background-color:#3b82f6; 
+    padding: 1.05vw 1.05vh;
+    border-radius: 12px;
+}
+.pattern-2024:hover{
+    background-color:var(--hover);
+    color: white;
+}
+
+.checkboxes-2019{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 3 equal columns */
+    grid-template-rows: repeat(9, 1fr); 
+    gap: 1rem; /* optional spacing between items */
+    /* position:relative;
+    top: 30%; */
+}
+.checkboxes-2019 label{
+    display: flex;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.checkboxes-2024{
+    display: none;
+    grid-template-columns: repeat(2, 1fr); /* 3 equal columns */
+    grid-template-rows: repeat(9, 1fr); 
+    gap: 1rem;
+}
+input[type="checkbox"],
+label:hover {
+    cursor: pointer;
+    color: #3b82f6;
+    transition: all 0s linear;
+}
+
+.checkboxes-2024 label{
+    display: none;
+    gap: 8px;
+    cursor: pointer;
+}
+.instruction{
+    font-size: 12px;
+    color: var(--p-color);
+    width: 90%;
+    height: auto;
+    padding: 10px;
+}
+.course-table {
+  width: 90%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.course-table thead {
+  background-color: #f1f5f9; /* Light blue-gray */
+}
+
+.course-table th, .course-table td {
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.course-table tbody tr {
+  border-top: 1px solid #e2e8f0;
+}
+
+.delete-btn {
+  background-color: #ef4444; /* red-500 */
+  color: white;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.extract{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    width: 90%;
+    background-color: #10b981;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+}
+.extract button{
+    all: unset;
+    padding: 1.5vw 1.5vh;
+    border-radius: 12px;
+
+}
+
+@media (max-width: 560px) {
+  .course-info {
+    grid-template-columns: 1fr;
+  }
+
+  .pattern {
+    flex-direction: row;
+    gap: 2vh;
+  }
+  .pattern button{
+    padding: 2vw 2vh;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+}
