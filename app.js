@@ -50,51 +50,82 @@ btn2019.addEventListener('click', () => {
 //modyfint table
 let addCourse = document.querySelector('.course-name button');
 let tableBody = document.querySelector('.course-table tbody');
-let input = document.querySelector('.course-name input')
+let input = document.querySelector('.course-name input');
 let count = 1;
 
 addCourse.addEventListener('click', () => {
-    let row = document.createElement('tr');
+    let courseName = input.value.trim();
 
-    let col1 = document.createElement('td');
-    col1.innerText = count++;
+    // Validate course name
+    if (courseName === "") {
+        showSlideAlert("Please type course name");
+        return;
+    }
 
-    let col2 = document.createElement('td');
-    col2.innerText = input.value; // Replace with dynamic course name if needed
-
-    input.value="";
-
+    // Collect checked checkbox values
     let checkedValues = [];
     document.querySelectorAll('.score-type:checked').forEach((checkbox) => {
         checkedValues.push(checkbox.value);
     });
 
+    // Validate checkboxes
+    if (checkedValues.length === 0) {
+        showSlideAlert("Please select at least one score type.");
+        return;
+    }
+
+    // Create a table row
+    let row = document.createElement('tr');
+
+    // Column 1: Count
+    let col1 = document.createElement('td');
+    col1.innerText = count++;
+    row.appendChild(col1);
+
+    // Column 2: Course Name
+    let col2 = document.createElement('td');
+    col2.innerText = courseName;
+    row.appendChild(col2);
+
+    // Column 3: Checked values
     let col3 = document.createElement('td');
     col3.innerText = checkedValues.join(", ");
+    row.appendChild(col3);
 
-    // ✅ Reset all checkboxes
-    document.querySelectorAll('.score-type:checked').forEach((checkbox) => {
-        checkbox.checked = false;
-    });
-    // Replace with dynamic score types if needed
-
+    // Column 4: Delete button
     let col4 = document.createElement('td');
     let deleteBtn = document.createElement('button');
     deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
-
     deleteBtn.classList.add('delete-btn');
-
-    deleteBtn.addEventListener('click', () => {
-        row.remove();
-    });
-
+    deleteBtn.addEventListener('click', () => row.remove());
     col4.appendChild(deleteBtn);
-
-    row.appendChild(col1);
-    row.appendChild(col2);
-    row.appendChild(col3);
     row.appendChild(col4);
 
+    // Append row to table
     tableBody.appendChild(row);
+
+    // Reset inputs
+    input.value = "";
+    document.querySelectorAll('.score-type:checked').forEach((checkbox) => {
+        checkbox.checked = false;
+    });
 });
+
+
+//alert funtion
+function showSlideAlert(message, duration = 2000) {
+  const alertBox = document.getElementById('slideAlert');
+  const alertText = document.getElementById('slideAlertText');
+  alertText.innerText = message;
+  alertBox.classList.add('active');
+
+  // Auto-dismiss after `duration` ms
+  setTimeout(() => {
+    alertBox.classList.remove('active');
+  }, duration);
+}
+
+function closeSlideAlert() {
+  document.getElementById('slideAlert').classList.remove('active');
+}
 
