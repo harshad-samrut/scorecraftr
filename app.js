@@ -5,7 +5,6 @@ let uploadContainer = document.querySelector(".upload");
 let uploadedFile = null; // stores the uploaded file for later use
 let lastUploadedFileKey = null;
 
-
 pdf.addEventListener("change", () => {
   if (pdf.files.length > 0) {
     const currentFile = pdf.files[0];
@@ -49,9 +48,6 @@ pdf.addEventListener("change", () => {
     showSlideAlertFileUploded("File uploaded successfully ✅");
   }
 });
-
-
-
 
 //selecting btn pattern 2013
 let btn2019 = document.querySelector('#pattern-2019');
@@ -110,7 +106,7 @@ addCourse.addEventListener('click', () => {
     // Validate checkboxes
     if (checkedValues.length === 0) {
         showSlideAlert("Please select at least one score type.");
-        return;
+        return; 
     }
 
     // Create a table row
@@ -147,9 +143,7 @@ addCourse.addEventListener('click', () => {
     input.value = "";
     document.querySelectorAll('.score-type:checked').forEach((checkbox) => {
         checkbox.checked = false;
-    });
-
-    
+    }); 
 });
 
 //extract button
@@ -160,11 +154,24 @@ extract.addEventListener('click',()=>{
   let rowCount = document.querySelector('.course-table tbody').rows.length;
   console.log("Number of rows:", rowCount);
 
-  if(rowCount > 0){
-    label.classList.remove('uploaded');
-    label.innerHTML = `<i class="fa-solid fa-file-arrow-up"></i> Upload file`;
-    console.log(label); // Check if it's not null
+  if (rowCount > 0) {
+  label.classList.remove('uploaded');
+  label.innerHTML = `<i class="fa-solid fa-file-arrow-up"></i> Upload file`;
+
+  let body = document.querySelector('body');
+
+    setTimeout(() => {
+      body.innerHTML = ""; // Clear all content (preserves formatting)
+      body.innerHTML = `
+        <h2 style="text-align:center; color:green; margin-top: 50px;">
+          ✅ Request received<br>⚙️ Backend not implemented yet. You have to code it.
+        </h2>`;
+    }, 2000);
   }
+  if (rowCount <=0){
+    showSlideAlert("Please add course");
+  }
+
 
   if (!uploadedFile) {
       showSlideAlert("Please upload file");
@@ -185,9 +192,6 @@ extract.addEventListener('click',()=>{
         showSlideAlert("Please select at least one score type.");
         return;
     }
-
-  
-
 })
 
 //alert funtion for wrong things
