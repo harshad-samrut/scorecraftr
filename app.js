@@ -2,26 +2,54 @@ let pdf = document.querySelector('#inputFile');
 let label = document.querySelector(".input-label");
 let uploadContainer = document.querySelector(".upload");
 
+let lastUploadedFileKey = null; // To track last uploaded file
+
 pdf.addEventListener("change", () => {
-    if (pdf.files.length > 0) {
-        label.classList.add('uploaded');
-        label.innerText = 'PDF Uploaded ✅';
+  if (pdf.files.length > 0) {
+    const currentFile = pdf.files[0];
+    // const currentFileKey = `${currentFile.name}_${currentFile.size}`;
 
-        // Remove previously appended info if any
-        uploadContainer.querySelectorAll("small.file-info").forEach(el => el.remove());
-
-        let fileName = document.createElement('small');
-        let fileType = document.createElement('small');
-
-        fileName.classList.add("file-info");
-        fileType.classList.add("file-info");
-
-        fileName.innerText = `📄 ${pdf.files[0].name}`;
-        fileType.innerText = `📂 File Type: ${pdf.files[0].type}`;
-
-        uploadContainer.append(fileName, fileType);
+    // Check if not a PDF
+    if (currentFile.type !== "application/pdf") {
+      showSlideAlert("Only PDF files are allowed.");
+      return;
     }
+
+    // Check if same file is uploaded
+    const currentFileKey = `${currentFile.name}_${currentFile.size}_${currentFile.lastModified}`;
+
+if (currentFileKey === lastUploadedFileKey) {
+  showSlideAlert("This file is already uploaded.");
+  return;
+}
+
+// Allow change event to trigger for same file again
+pdf.value = "";
+lastUploadedFileKey = currentFileKey;
+
+
+    label.classList.add('uploaded');
+    label.innerText = 'PDF Uploaded ✅';
+
+    // Remove old info
+    uploadContainer.querySelectorAll("small.file-info").forEach(el => el.remove());
+
+    // Show file info
+    let fileName = document.createElement('small');
+    let fileType = document.createElement('small');
+
+    fileName.classList.add("file-info");
+    fileType.classList.add("file-info");
+
+    fileName.innerText = `📄 ${currentFile.name}`;
+    fileType.innerText = `📂 File Type: ${currentFile.type}`;
+
+    uploadContainer.append(fileName, fileType);
+
+    showSlideAlertFileUploded("File uploaded successfully ✅");
+  }
 });
+
 
 //selecting btn pattern 2013
 let btn2019 = document.querySelector('#pattern-2019');
@@ -112,7 +140,7 @@ addCourse.addEventListener('click', () => {
 });
 
 
-//alert funtion
+//alert funtion for wrong things
 function showSlideAlert(message, duration = 2000) {
   const alertBox = document.getElementById('slideAlert');
   const alertText = document.getElementById('slideAlertText');
@@ -127,5 +155,22 @@ function showSlideAlert(message, duration = 2000) {
 
 function closeSlideAlert() {
   document.getElementById('slideAlert').classList.remove('active');
+}
+
+//alert for file uploaded successfully
+function showSlideAlertFileUploded(message, duration = 2000) {
+  const alertBox = document.getElementById('showSlideAlertFileUploded');
+  const alertText = document.getElementById('slideAlertFileUploadedText');
+  alertText.innerText = message;
+  alertBox.classList.add('active');
+
+  // Auto-dismiss after `duration` ms
+  setTimeout(() => {
+    alertBox.classList.remove('active');
+  }, duration);
+}
+
+function closeSlideAlertFileUploded() {
+  document.getElementById('showSlideAlertFileUploded').classList.remove('active');
 }
 
