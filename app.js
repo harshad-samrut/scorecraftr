@@ -2,36 +2,36 @@ let pdf = document.querySelector('#inputFile');
 let label = document.querySelector(".input-label");
 let uploadContainer = document.querySelector(".upload");
 
-let lastUploadedFileKey = null; // To track last uploaded file
+let uploadedFile = null; // stores the uploaded file for later use
+let lastUploadedFileKey = null;
+
 
 pdf.addEventListener("change", () => {
   if (pdf.files.length > 0) {
     const currentFile = pdf.files[0];
-    // const currentFileKey = `${currentFile.name}_${currentFile.size}`;
 
-    // Check if not a PDF
+    // ✅ Check for PDF
     if (currentFile.type !== "application/pdf") {
       showSlideAlert("Only PDF files are allowed.");
       return;
     }
 
-    // Check if same file is uploaded
     const currentFileKey = `${currentFile.name}_${currentFile.size}_${currentFile.lastModified}`;
 
-if (currentFileKey === lastUploadedFileKey) {
-  showSlideAlert("This file is already uploaded.");
-  return;
-}
+    // ✅ Correct comparison BEFORE assigning
+    if (currentFileKey === lastUploadedFileKey) {
+      showSlideAlert("This file is already uploaded.");
+      return;
+    }
 
-// Allow change event to trigger for same file again
-pdf.value = "";
-lastUploadedFileKey = currentFileKey;
-
+    // ✅ Now update key and store file
+    lastUploadedFileKey = currentFileKey;
+    uploadedFile = currentFile;
 
     label.classList.add('uploaded');
     label.innerText = 'PDF Uploaded ✅';
 
-    // Remove old info
+    // Clean old info
     uploadContainer.querySelectorAll("small.file-info").forEach(el => el.remove());
 
     // Show file info
@@ -51,12 +51,18 @@ lastUploadedFileKey = currentFileKey;
 });
 
 
+
+
 //selecting btn pattern 2013
 let btn2019 = document.querySelector('#pattern-2019');
 let btn2024 = document.querySelector('#pattern-2024');
 let box2019 = document.querySelector('.checkboxes-2019');
 let box2024 = document.querySelector('.checkboxes-2024');
 let checkboxe2024label = document.querySelectorAll('.checkboxes-2024 label');
+
+// Collect checked checkbox values
+    let checkedValues = [];
+
 btn2024.addEventListener('click', () => {
     btn2019.classList.remove('pattern-2019');
     btn2024.classList.add('pattern-2024');
@@ -84,13 +90,18 @@ let count = 1;
 addCourse.addEventListener('click', () => {
     let courseName = input.value.trim();
 
+      if (!uploadedFile) {
+      showSlideAlert("Please upload file");
+      return;
+    }
+
+
     // Validate course name
     if (courseName === "") {
         showSlideAlert("Please type course name");
         return;
     }
 
-    // Collect checked checkbox values
     let checkedValues = [];
     document.querySelectorAll('.score-type:checked').forEach((checkbox) => {
         checkedValues.push(checkbox.value);
@@ -137,8 +148,47 @@ addCourse.addEventListener('click', () => {
     document.querySelectorAll('.score-type:checked').forEach((checkbox) => {
         checkbox.checked = false;
     });
+
+    
 });
 
+//extract button
+let extract = document.querySelector('.extract button');
+
+extract.addEventListener('click',()=>{
+  //how many rows in table
+  let rowCount = document.querySelector('.course-table tbody').rows.length;
+  console.log("Number of rows:", rowCount);
+
+  if(rowCount > 0){
+    label.classList.remove('uploaded');
+    label.innerHTML = `<i class="fa-solid fa-file-arrow-up"></i> Upload file`;
+    console.log(label); // Check if it's not null
+  }
+
+  if (!uploadedFile) {
+      showSlideAlert("Please upload file");
+      return;
+    }
+
+  let courseName = input.value.trim();
+  if (courseName === "") {
+        showSlideAlert("Please type course name");
+        return;
+    }
+
+  let checkedValues = [];
+  document.querySelectorAll('.score-type:checked').forEach((checkbox) => {
+    checkedValues.push(checkbox.value);
+  });
+  if (checkedValues.length === 0) {
+        showSlideAlert("Please select at least one score type.");
+        return;
+    }
+
+  
+
+})
 
 //alert funtion for wrong things
 function showSlideAlert(message, duration = 2000) {
@@ -173,4 +223,3 @@ function showSlideAlertFileUploded(message, duration = 2000) {
 function closeSlideAlertFileUploded() {
   document.getElementById('showSlideAlertFileUploded').classList.remove('active');
 }
-
